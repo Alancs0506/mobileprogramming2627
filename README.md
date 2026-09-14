@@ -10,3 +10,10 @@
 ######  Materi 
 - buat aplikasi Flutter Pertama 
 - menjalankan aplikasi  Flutter
+
+#### Day3
+######  Materi
+- fundamental Dart
+- type data  
+- loop, selection 
+- cek folder day3
