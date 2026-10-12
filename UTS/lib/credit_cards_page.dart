@@ -67,7 +67,16 @@ class CreditCardsPage extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         // KODE UI ANDA DI SINI
-        const Text("UI Judul belum dibuat...") 
+        // padding 1 
+        Padding(
+            padding: const EdgeInsets.only(),
+
+        ),
+        // padding 2
+        Padding(
+            padding: const EdgeInsets.only(),
+
+        ),
       ],
     );
   }
@@ -91,7 +100,7 @@ class CreditCardsPage extends StatelessWidget {
     );
   }
 
-  // Build the top row containing logos
+  // buat  top row containing logo
   Row _buildLogosBlock() {
     // TODO 5: Panggil asset gambar lokal "contact_less.png" dan "mastercard.png".
     // CATATAN: Atur posisi sejajar berlawanan (kiri dan kanan). 
@@ -104,5 +113,8 @@ class CreditCardsPage extends StatelessWidget {
       ],
     );
   }
+  // buat Column berisi kontainer dan Informasi
 
+  // buat   FloatingActionButton
+  
   // Build Column
