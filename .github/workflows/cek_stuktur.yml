@@ -176,7 +176,7 @@ jobs:
               echo "=========================================================="
               exit 1
             fi
-      -   name: 9.  validasi MyHome dan Routing Navigasi 
+      -   name: 9. validasi MyHome dan Routing Navigasi 
           run : |
             ERROR=0
 
