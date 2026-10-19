@@ -336,11 +336,11 @@ jobs:
           cek_teks "$FILE_MAIN" "routes: {" \
             "Deklarasikan properti 'routes: {' di dalam MaterialApp."
 
-          cek_teks "$FILE_MAIN" "'/': (context) =>  MyHome()" \
-            "Daftarkan route awal '/': (context) =>  MyHome()."
+          cek_teks "$FILE_MAIN" "'/': (context) => MyHome()" \
+            "Daftarkan route awal '/': (context) => MyHome()."
 
-          cek_teks "$FILE_MAIN" "'/layar2': (context) =>  LayarKedua()" \
-            "Daftarkan route layar kedua '/layar2': (context) =>  LayarKedua()."
+          cek_teks "$FILE_MAIN" "'/layar2': (context) => LayarKedua()" \
+            "Daftarkan route layar kedua '/layar2': (context) => LayarKedua()."
 
           if [ $ERROR -eq 1 ]; then
             echo ""
