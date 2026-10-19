@@ -1,4 +1,4 @@
-name: Cek Struktur File dan Widget UTS
+name: Cek Struktur File 
 
 on: 
     push:
