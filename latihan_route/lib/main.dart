@@ -27,7 +27,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(title: 'Test Route', home: MyHome());
+    return MaterialApp(title: 'Test Route', 
+    home: MyHome(),
+    routes: {
+      '/' : (context) =>  MyHome(),
+      '/layar2' : (context) => LayarKedua()
+
+    },
+    );
   }
 }
 

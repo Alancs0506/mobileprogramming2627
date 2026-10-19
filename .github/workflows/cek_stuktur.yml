@@ -291,6 +291,64 @@ jobs:
           else
             echo "✅ Validasi passing parameter pesan berhasil!"
           fi
+      - name: 12. Validasi Named Routes pada MyApp
+        run: |
+          ERROR=0
+
+          cek_teks() {
+            local file=$1
+            local teks_wajib=$2
+            local petunjuk=$3
+            if ! grep -Fq "$teks_wajib" "$file"; then
+              echo "----------------------------------------------------"
+              echo "❌ PELANGGARAN di $file"
+              echo "   Kode tidak ditemukan: '$teks_wajib'"
+              echo "   👉 Petunjuk: $petunjuk"
+              echo "----------------------------------------------------"
+              ERROR=1
+            fi
+          }
+
+          cek_larangan() {
+            local file=$1
+            local teks_terlarang=$2
+            local petunjuk=$3
+            if grep -Fq "$teks_terlarang" "$file"; then
+              echo "----------------------------------------------------"
+              echo "❌ PELANGGARAN di $file"
+              echo "   Kode terlarang ditemukan: '$teks_terlarang'"
+              echo "   👉 Petunjuk: $petunjuk"
+              echo "----------------------------------------------------"
+              ERROR=1
+            fi
+          }
+
+          FILE_MAIN="latihan_route/lib/main.dart"
+
+          echo "Mengecek konfigurasi routes di $FILE_MAIN..."
+
+          # 1. Cek larangan properti home aktif
+          cek_larangan "$FILE_MAIN" "home: MyHome()" \
+            "Properti 'home:' harus diganti dengan komentar."
+
+
+          # 3. Cek struktur routes
+          cek_teks "$FILE_MAIN" "routes: {" \
+            "Deklarasikan properti 'routes: {' di dalam MaterialApp."
+
+          cek_teks "$FILE_MAIN" "'/': (context) =>  MyHome()" \
+            "Daftarkan route awal '/': (context) =>  MyHome()."
+
+          cek_teks "$FILE_MAIN" "'/layar2': (context) =>  LayarKedua()" \
+            "Daftarkan route layar kedua '/layar2': (context) =>  LayarKedua()."
+
+          if [ $ERROR -eq 1 ]; then
+            echo ""
+            echo "❌ Validasi named routes pada MyApp gagal! Perbaiki kode sesuai petunjuk di atas."
+            exit 1
+          else
+            echo "✅ Validasi named routes pada MyApp berhasil!"
+          fi
 
             
 
