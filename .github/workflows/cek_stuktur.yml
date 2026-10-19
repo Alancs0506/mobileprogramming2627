@@ -2,9 +2,9 @@ name: Cek Struktur File
 
 on: 
     push:
-        branches: [ "soal_uts" ]
+        branches: [ "latihan_route" ]
     pull_request:
-        branches: [ "soal_uts" ]
+        branches: [ "latihan_route" ]
 
 
 jobs:
@@ -27,3 +27,14 @@ jobs:
           
           
           echo "✅ Semua file wajib ditemukan."
+      - name: 8. Cek Implementasi LayarKedua
+        run: |
+          echo "Mengecek LayarKedua di seluruh file .dart..."
+          grep -q "class LayarKedua extends StatelessWidget" latihan_route/lib/*.dart || { echo "❌ Class LayarKedua tidak ditemukan!"; exit 1; }
+          grep -q "AppBar" latihan_route/lib/*.dart || { echo "❌ AppBar pada LayarKedua tidak ditemukan!"; exit 1; }
+          grep -q "Ini Screen 2" latihan_route/lib/*.dart || { echo "❌ Teks judul 'Ini Screen 2' tidak ditemukan!"; exit 1; }
+          grep -q "screen kedua, tap icon back di app bar" latihan_route/lib/*.dart || { echo "❌ Teks pada body LayarKedua tidak ditemukan!"; exit 1; }
+          echo "✅ Implementasi LayarKedua sudah sesuai."
+      
+        
+      
