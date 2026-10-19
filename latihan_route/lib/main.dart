@@ -58,7 +58,7 @@ class MyHome extends StatelessWidget {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) {
-                      return LayarKeduaPisah();
+                      return LayarKeduaPisah(pesan: "halloo ini pesan dari screen 1",);
                     },
                   ),
                 );

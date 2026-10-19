@@ -214,6 +214,83 @@ jobs:
             else
               echo "✅ Validasi class MyHome dan navigasi berhasil!"
             fi
+      - name: 10. Validasi Struktur layarkeduapisah.dart
+        run: |
+          ERROR=0
+
+          # Fungsi pembantu dengan pesan petunjuk perbaikan yang jelas
+          cek_teks() {
+            local file=$1
+            local teks_wajib=$2
+            local petunjuk=$3
+            if ! grep -Fq "$teks_wajib" "$file"; then
+              echo "----------------------------------------------------"
+              echo "❌ PELANGGARAN di $file"
+              echo "   Kode tidak ditemukan: '$teks_wajib'"
+              echo "   👉 Petunjuk: $petunjuk"
+              echo "----------------------------------------------------"
+              ERROR=1
+            fi
+          }
+
+          FILE_PISAH="latihan_route/lib/layarkeduapisah.dart"
+
+          echo "Mengecek isi file $FILE_PISAH..."
+
+          # Pengecekan beserta petunjuk perbaikannya
+          cek_teks "$FILE_PISAH" "const LayarKeduaPisah({Key? key, required this.pesan});" \
+            "Tambahkan constructor wajib dengan parameter 'required this.pesan'."
+
+          cek_teks "$FILE_PISAH" "final String pesan;" \
+            "Deklarasikan variabel 'final String pesan;' di dalam class LayarKeduaPisah."
+
+          cek_teks "$FILE_PISAH" 'Text("Ini screen kedua pisah,ada Pesan : $pesan")' \
+            "Gunakan Text(\"Ini screen kedua pisah,ada Pesan : \$pesan\") pada child ElevatedButton."
+
+          if [ $ERROR -eq 1 ]; then
+            echo ""
+            echo "❌ Pengecekan layarkeduapisah.dart gagal! Perbaiki kode berdasarkan petunjuk di atas."
+            exit 1
+          else
+            echo "✅ Validasi layarkeduapisah.dart berhasil!"
+          fi
+      
+      - name: 11. Validasi Passing Parameter Pesan ke LayarKeduaPisah
+        run: |
+          ERROR=0
+
+          cek_teks() {
+            local file=$1
+            local teks_wajib=$2
+            local petunjuk=$3
+            if ! grep -Fq "$teks_wajib" "$file"; then
+              echo "----------------------------------------------------"
+              echo "❌ PELANGGARAN di $file"
+              echo "   Kode tidak ditemukan: '$teks_wajib'"
+              echo "   👉 Petunjuk: $petunjuk"
+              echo "----------------------------------------------------"
+              ERROR=1
+            fi
+          }
+
+          FILE_MAIN="latihan_route/lib/main.dart"
+
+          echo "Mengecek pengiriman parameter di $FILE_MAIN..."
+
+          # Pengecekan komponen navigasi dan passing parameter
+          cek_teks "$FILE_MAIN" 'LayarKeduaPisah(' \
+            "Pastikan memanggil Widget LayarKeduaPisah pada MaterialPageRoute."
+
+          cek_teks "$FILE_MAIN" 'pesan: "halloo ini pesan dari screen 1"' \
+            "Kirimkan parameter pesan dengan isi 'halloo ini pesan dari screen 1' saat memanggil LayarKeduaPisah()."
+
+          if [ $ERROR -eq 1 ]; then
+            echo ""
+            echo "❌ Validasi pengiriman pesan ke LayarKeduaPisah gagal! Perbaiki sesuai petunjuk di atas."
+            exit 1
+          else
+            echo "✅ Validasi passing parameter pesan berhasil!"
+          fi
 
             
 
