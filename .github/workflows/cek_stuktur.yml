@@ -2,9 +2,9 @@ name: Cek Struktur File
 
 on: 
     push:
-        branches: [ "latihan_route" ]
+        branches: [ "route" ]
     pull_request:
-        branches: [ "latihan_route" ]
+        branches: [ "route" ]
 
 
 jobs:
