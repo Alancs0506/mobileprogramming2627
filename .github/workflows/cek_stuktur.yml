@@ -103,17 +103,17 @@ jobs:
             grep -q "Navigator.of(context).push(MaterialPageRoute(builder: (context)" "$FILE" || { echo "❌ Ke Navigator tidak ditemukan "; ERROR=1; }
             grep -q "return LayarKedua()" "$FILE" || { echo "❌ Ke return LayarKedua() Kedua tidak ditemukan "; ERROR=1; }
       
-      - name: 4. Install Dependencies
+      - name: 5. Install Dependencies
         run : |
             echo "Buka cmd dan jalankan flutter pub get"
             flutter pub Get
       
-      - name: 5. Uji Kompilasi Web (Pengganti flutter run)
+      - name: 6. Uji Kompilasi Web (Pengganti flutter run)
         run : |
             echo "Buka cmd dan jalankan flutter build web --release"
             flutter build web --release
 
-      - name: 6. Meningkatkan modularitas, class layarKedua dipisahkan
+      - name: 7. Meningkatkan modularitas, class layarKedua dipisahkan
         run : |
             FILE="latihan_route/lib/main.dart"
             ERROR = 0
@@ -156,7 +156,7 @@ jobs:
               echo "✅ Semua teks wajib ditemukan dan tidak ada pelanggaran!"
             fi
 
-      - name: 7. cek file layarkeduapisah.dart 
+      - name: 8. cek file layarkeduapisah.dart 
         run : |
            echo "Mengecek struktur file  gitS/lib/..."
             ERROR=0
@@ -176,7 +176,7 @@ jobs:
               echo "=========================================================="
               exit 1
             fi
-      -   name:  validasi MyHome dan Routing Navigasi 
+      -   name: 9.  validasi MyHome dan Routing Navigasi 
           run : |
             ERROR=0
 
