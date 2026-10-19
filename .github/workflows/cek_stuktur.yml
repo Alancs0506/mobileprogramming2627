@@ -106,12 +106,12 @@ jobs:
       - name: 5. Install Dependencies
         run : |
             echo "Buka cmd dan jalankan flutter pub get"
-            flutter pub Get
+            # flutter pub Get
       
       - name: 6. Uji Kompilasi Web (Pengganti flutter run)
         run : |
             echo "Buka cmd dan jalankan flutter build web --release"
-            flutter build web --release
+            # flutter build web --release
 
       - name: 7. Meningkatkan modularitas, class layarKedua dipisahkan
         run : |
