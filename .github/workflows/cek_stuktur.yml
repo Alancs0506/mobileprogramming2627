@@ -115,14 +115,14 @@ jobs:
 
       - name: 7. Meningkatkan modularitas, class layarKedua dipisahkan
         run : |
-            ERROR = 0
+            ERROR=0
             # Fungsi pembantu untuk memindai teks wajib
             cek_teks() {
               local file=$1
               local teks_wajib=$2
               if ! grep -q "$teks_wajib" "$file"; then
                 echo "❌ PELANGGARAN di $file: Anda tidak ada atau menghapus atau mengubah deklarasi '$teks_wajib'"
-                ERROR = 1
+                ERROR=1
               fi
             }
             # Fungsi pembantu untuk memindai teks terlarang (opsional)
@@ -131,17 +131,18 @@ jobs:
               local teks_terlarang=$2
               if grep -q "$teks_terlarang" "$file"; then
                 echo "❌ PELANGGARAN di $file: Ditemukan penggunaan kode terlarang '$teks_terlarang'"
-                ERROR = 1
+                ERROR=1
               fi
             }
             
             # FILE 
             FILE_MAIN="latihan_route/lib/main.dart"
-            # teks wajib ada
-            cek_teks "FILE_MAIN" "import 'layarkeduapisah.dart"
-            cek_teks "FILE_MAIN" "void main()"
-            cek_teks "FILE_MAIN" "class MyApp extends StatelessWidget"
-            cek_teks "FILE_MAIN" "class MyHome extends StatelessWidget"
+
+            # Teks wajib ada (Gunakan $FILE_MAIN)
+            cek_teks "$FILE_MAIN" "import 'layarkeduapisah.dart';"
+            cek_teks "$FILE_MAIN" "void main()"
+            cek_teks "$FILE_MAIN" "class MyApp extends StatelessWidget"
+            cek_teks "$FILE_MAIN" "class MyHome extends StatelessWidget"
 
             # tekas Dilarang ada
             
@@ -149,8 +150,8 @@ jobs:
             # EVALUASI HASIL AKHIR
             # ====================================================
             if [ $ERROR -eq 1 ]; then
-              echo "❌ Pengecekan gagal! Silakan perbaiki  di atas."
-              exit 1
+            echo "❌ Pengecekan gagal! Silakan perbaiki di atas."
+            exit 1
             else
               echo "✅ Semua teks wajib ditemukan dan tidak ada pelanggaran!"
             fi
