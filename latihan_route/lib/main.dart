@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
+import 'layarkeduapisah.dart';
 
 class LayarKedua extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Ini Screen 2'),
-        ),
-        body: Center(
-            child: ElevatedButton(
+      appBar: AppBar(title: const Text('Ini Screen 2')),
+      body: Center(
+        child: ElevatedButton(
           child: const Text("Ini screen kedua, tap icon back di app bar"),
           onPressed: () {
             Navigator.of(context).pop();
           },
-        )));
+        ),
+      ),
+    );
   }
 }
 
@@ -35,17 +36,37 @@ class MyHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Test Route'),
-      ),
+      appBar: AppBar(title: const Text('Test Route')),
       body: Center(
-        child: ElevatedButton(
-            child: const Text('Ke screen Kedua'),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                return LayarKedua();
-              }));
-            }),
+        child: Column(
+          children: [
+            ElevatedButton(
+              child: const Text('Ke screen Kedua'),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return LayarKedua();
+                    },
+                  ),
+                );
+              },
+            ),
+            ElevatedButton(
+              child: const Text('Ke Screen Kedua Pisah'),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) {
+                      return LayarKeduaPisah();
+                    },
+                  ),
+                );
+              },
+             
+            ),
+          ],
+        ),
       ),
     );
   }
