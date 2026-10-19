@@ -313,10 +313,10 @@ jobs:
             local file=$1
             local teks_terlarang=$2
             local petunjuk=$3
-            if grep -Fq "$teks_terlarang" "$file"; then
+            if grep -E "^[[:space:]]*home:" "$file" > /dev/null; then
               echo "----------------------------------------------------"
               echo "❌ PELANGGARAN di $file"
-              echo "   Kode terlarang ditemukan: '$teks_terlarang'"
+              echo "   Properti 'home:' masih aktif (tidak di-komentar/dihapus)."
               echo "   👉 Petunjuk: $petunjuk"
               echo "----------------------------------------------------"
               ERROR=1
@@ -327,20 +327,31 @@ jobs:
 
           echo "Mengecek konfigurasi routes di $FILE_MAIN..."
 
-          # 1. Cek larangan properti home aktif
-          cek_larangan "$FILE_MAIN" "home: MyHome()" \
-            "Properti 'home:' harus diganti dengan komentar."
+          # 1. Pastikan home: MyHome() tidak aktif secara langsung
+          cek_larangan "$FILE_MAIN" "home:" \
+            "Hapus properti home: MyHome() atau berikan komentar // di depannya."
 
-
-          # 3. Cek struktur routes
+          # 2. Cek deklarasi routes
           cek_teks "$FILE_MAIN" "routes: {" \
             "Deklarasikan properti 'routes: {' di dalam MaterialApp."
 
-          cek_teks "$FILE_MAIN" "'/': (context) => MyHome()" \
-            "Daftarkan route awal '/': (context) => MyHome()."
+          # 3. Cek route '/' ke MyHome()
+          if ! grep -Eq "'/'[[:space:]]*:[[:space:]]*\(context\)[[:space:]]*=>[[:space:]]*(const[[:space:]]+)?MyHome\(\)" "$FILE_MAIN"; then
+            echo "----------------------------------------------------"
+            echo "❌ PELANGGARAN di $FILE_MAIN"
+            echo "   👉 Petunjuk: Daftarkan route '/' : (context) => MyHome()"
+            echo "----------------------------------------------------"
+            ERROR=1
+          fi
 
-          cek_teks "$FILE_MAIN" "'/layar2': (context) => LayarKedua()" \
-            "Daftarkan route layar kedua '/layar2': (context) => LayarKedua()."
+          # 4. Cek route '/layar2' ke LayarKedua()
+          if ! grep -Eq "'/layar2'[[:space:]]*:[[:space:]]*\(context\)[[:space:]]*=>[[:space:]]*(const[[:space:]]+)?LayarKedua\(\)" "$FILE_MAIN"; then
+            echo "----------------------------------------------------"
+            echo "❌ PELANGGARAN di $FILE_MAIN"
+            echo "   👉 Petunjuk: Daftarkan route '/layar2' : (context) => LayarKedua()"
+            echo "----------------------------------------------------"
+            ERROR=1
+          fi
 
           if [ $ERROR -eq 1 ]; then
             echo ""
