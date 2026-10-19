@@ -2,11 +2,9 @@ name: Cek Struktur File dan Widget UTS
 
 on: 
     push:
-        branches:
-        - soal_uts
+        branches: [ "soal_uts" ]
     pull_request:
-        branches:
-        - soal_uts
+        branches: [ "soal_uts" ]
 
 
 jobs:
