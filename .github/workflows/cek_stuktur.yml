@@ -206,7 +206,7 @@ jobs:
             cek_teks "$TARGET_FILE" "Navigator.of(context).push"
             cek_teks "$TARGET_FILE" "MaterialPageRoute"
             cek_teks "$TARGET_FILE" "LayarKedua()"
-            cek_teks "$TARGET_FILE" "LayarKeduaPisah()"
+            cek_teks "$TARGET_FILE" "LayarKeduaPisah("
 
             if [ $ERROR -eq 1 ]; then
               echo "❌ Validasi class MyHome gagal!"
