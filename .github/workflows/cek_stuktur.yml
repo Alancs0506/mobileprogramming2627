@@ -162,12 +162,12 @@ jobs:
             ERROR=0
 
             # Cek file main.dart
-            if [ ! -f "latihan_route/lib/Layarkeduapisah.dart" ]; then 
+            if [ ! -f "latihan_route/lib/layarkeduapisah.dart" ]; then 
               echo "❌ File Layarkeduapisah.dart tidak ditemukan!"
-              echo "Buat file pada latihan_route/lib/Layarkeduapisah.dart"
+              echo "Buat file pada latihan_route/lib/layarkeduapisah.dart"
               ERROR=1
             else 
-              echo "✅ File Layarkeduapisah.dart ditemukan."
+              echo "✅ File layarkeduapisah.dart ditemukan."
             fi
 
             if [ $ERROR -eq 1 ]; then
