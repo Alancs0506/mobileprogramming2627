@@ -17,33 +17,106 @@ jobs:
 
       - name: Cek Keberadaan File
         run: |
-          echo "Mengecek struktur file  gitS/lib/..."
+            echo "Mengecek struktur file  gitS/lib/..."
+            ERROR=0
+
+            # Cek file main.dart
+            if [ ! -f "latihan_route/lib/main.dart" ]; then 
+              echo "❌ File main.dart tidak ditemukan!"
+              ERROR=1
+            else 
+              echo "✅ File Main.dart ditemukan."
+            fi
+
+            if [ $ERROR -eq 1 ]; then
+              echo "=========================================================="
+              echo "❌ Perbaiki sesuai instruksi pada main.dart !"
+              echo "=========================================================="
+              exit 1
+            fi
           
-          # Cek file main.dart
-          if [ ! -f "latihan_route/lib/main.dart" ]; then 
-            echo "❌ File main.dart tidak ditemukan!"
-            exit 1
-          fi
-          
-          
-          echo "✅ Semua file wajib ditemukan."
       - name: 1. Cek Implementasi LayarKedua
         run: |
-          echo "Mengecek LayarKedua di seluruh file .dart..."
-          grep -q "class LayarKedua extends StatelessWidget" latihan_route/lib/*.dart || { echo "❌ Class LayarKedua tidak ditemukan!"; exit 1; }
-          grep -q "AppBar" latihan_route/lib/*.dart || { echo "❌ AppBar pada LayarKedua tidak ditemukan!"; exit 1; }
-          grep -q "Ini Screen 2" latihan_route/lib/*.dart || { echo "❌ Teks judul 'Ini Screen 2' tidak ditemukan!"; exit 1; }
-          grep -q "screen kedua, tap icon back di app bar" latihan_route/lib/*.dart || { echo "❌ Teks pada body LayarKedua tidak ditemukan!"; exit 1; }
-          echo "✅ Implementasi LayarKedua sudah sesuai."
-      - name: Cek fungsi main() di main.dart
+            ERROR=0
+            echo "Mengecek LayarKedua di seluruh file .dart..."
+            grep -q "class LayarKedua extends StatelessWidget" latihan_route/lib/*.dart || { echo "❌ Class LayarKedua tidak ditemukan!"; ERROR=1; }
+            grep -q "AppBar" latihan_route/lib/*.dart || { echo "❌ AppBar pada LayarKedua tidak ditemukan!"; ERROR=1; }
+            grep -q "Ini Screen 2" latihan_route/lib/*.dart || { echo "❌ Teks judul 'Ini Screen 2' tidak ditemukan!"; ERROR=1; }
+            grep -q "screen kedua, tap icon back di app bar" latihan_route/lib/*.dart || { echo "❌ Teks pada body LayarKedua tidak ditemukan!"; ERROR=1; }
+          
+            if [ $ERROR -eq 1 ]; then
+              echo "=========================================================="
+              echo "❌ Perbaiki sesuai LayarKedua!"
+              echo "=========================================================="
+              exit 1
+            fi
+            echo "✅ Implementasi LayarKedua sudah sesuai."
+
+      - name: 2. Cek fungsi main() di main.dart
         run: |
-          FILE="latihan_route/lib/main.dart"
-          
-          echo "Mengecek fungsi main..."
-          grep -q "void main()" "$FILE" || { echo "❌ Fungsi void main() tidak ditemukan di main.dart!"; exit 1; }
-          grep -q "runApp(const MyApp())" "$FILE" || { echo "❌ Pemanggilan runApp(const MyApp()) tidak ditemukan!"; exit 1; }
-          
-          echo "✅ Fungsi main() sudah sesuai."
+            FILE="latihan_route/lib/main.dart"
+            ERROR=0
+            echo "Mengecek fungsi main..."
+            grep -q "void main()" "$FILE" || { echo "❌ Fungsi void main() tidak ditemukan di main.dart!"; ERROR=1; }
+            grep -q "runApp(const MyApp())" "$FILE" || { echo "❌ Pemanggilan runApp(const MyApp()) tidak ditemukan!"; ERROR=1; }
+            
+            if [ $ERROR -eq 1 ]; then
+              echo "=========================================================="
+              echo "❌ Perbaiki sesuai MyApp!"
+              echo "=========================================================="
+              exit 1
+            fi
+            echo "✅ Implementasi LayarKedua sudah sesuai."
+            echo "✅ Fungsi main() sudah sesuai."
+      
+      - name: 3. cek class MyApp ()
+        run : |
+            FILE="latihan_route/lib/main.dart"
+            ERROR=0
+            echo "Mengecek fungsi class MyMyApp"
+            grep -q "class MyApp extends StatelessWidget" "$FILE" || { echo "❌ calss MyApp StatelessWidget tidak ditemukan "; ERROR=1; }
+            grep -q "Widget build(BuildContext context)" "$FILE" || { echo "❌ Widget build(BuildContext context) "; ERROR=1; }
+            grep -q "MaterialApp" "$FILE" || { echo "❌ MaterialApp Tidak ada"; ERROR=1; }
+            grep -q "Test Route" "$FILE" || { echo "❌ title: Test Route "; ERROR=1; }
+            grep -q "home: MyHome()" "$FILE" || { echo "❌ home: MyHome()"; ERROR=1; }
+            if [ $ERROR -eq 1 ]; then
+              echo "=========================================================="
+              echo "❌ Perbaiki pada class MyApp !"
+              echo "=========================================================="
+              exit 1
+              fi
+              echo "✅ Fungsi class MyApp() sudah sesuai." 
+
+      - name: 3. cek class MyHome  ()
+        run : |
+            FILE="latihan_route/lib/main.dart"
+            ERROR=0
+            echo "Mengecek fungsi class MyHome "
+            grep -q "class MyHome  extends StatelessWidget" "$FILE" || { echo "❌ calss MyHome  StatelessWidget tidak ditemukan "; ERROR=1; }
+            grep -q "Scaffold" "$FILE" || { echo "❌ Scaffold tidak ditemukan "; ERROR=1; }
+            grep -q "appBar: AppBar" "$FILE" || { echo "❌ AppBar tidak ditemukan "; ERROR=1; }
+            grep -q "title: const Text('Test Route')" "$FILE" || { echo "❌ title tidak ditemukan "; ERROR=1; }
+            grep -q "Center" "$FILE" || { echo "❌ Center tidak ditemukan "; ERROR=1; }
+            grep -q "ElevatedButton" "$FILE" || { echo "❌ ElevatedButton tidak ditemukan "; ERROR=1; }
+            grep -q "Text('Ke screen Kedua')" "$FILE" || { echo "❌ Ke screen Kedua tidak ditemukan "; ERROR=1; }
+            grep -q "onPressed" "$FILE" || { echo "❌ Ke onPressed Kedua tidak ditemukan "; ERROR=1; }
+            grep -q "Navigator.of(context).push(MaterialPageRoute(builder: (context)" "$FILE" || { echo "❌ Ke Navigator tidak ditemukan "; ERROR=1; }
+            grep -q "return LayarKedua()" "$FILE" || { echo "❌ Ke return LayarKedua() Kedua tidak ditemukan "; ERROR=1; }
+        
+
+
+
+
+
+
+
+
+           
+
+           
+
+      
+
       
       
         
