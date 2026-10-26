@@ -4,10 +4,7 @@ import 'package:flutter/material.dart';
 class LayarKeduaPisah extends StatelessWidget {
   final String pesan;
 
-  const LayarKeduaPisah({
-    super.key,
-    required this.pesan,
-  });
+  const LayarKeduaPisah({Key? key, required this.pesan});
 
   @override
   Widget build(BuildContext context) {
@@ -22,11 +19,7 @@ class LayarKeduaPisah extends StatelessWidget {
         ),
       ),
       body: Center(
-        child: Text(
-          'Ini screen kedua pisah,ada Pesan : $pesan',
-          textAlign: TextAlign.center,
-          style: const TextStyle(fontSize: 18),
-        ),
+        child: Text("Ini screen kedua pisah,ada Pesan : $pesan"),
       ),
     );
   }

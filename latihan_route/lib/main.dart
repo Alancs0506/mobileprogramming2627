@@ -32,7 +32,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// Screen pertama
 class MyHome extends StatelessWidget {
   const MyHome({super.key});
 
@@ -58,7 +57,7 @@ class MyHome extends StatelessWidget {
                 Navigator.of(context).push(
                   MaterialPageRoute(
                     builder: (context) => const LayarKeduaPisah(
-                      pesan: 'halloo ini pesan dari screen 1',
+                      pesan: "halloo ini pesan dari screen 1",
                     ),
                   ),
                 );
@@ -71,9 +70,6 @@ class MyHome extends StatelessWidget {
     );
   }
 }
-
-// Screen kedua
-
 
 class LayarKedua extends StatelessWidget {
   const LayarKedua({super.key});
