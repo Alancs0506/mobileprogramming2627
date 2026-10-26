@@ -73,6 +73,7 @@ class MyHome extends StatelessWidget {
 }
 
 // Screen kedua
+
 class LayarKedua extends StatelessWidget {
   const LayarKedua({super.key});
 
@@ -82,8 +83,8 @@ class LayarKedua extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Ini Screen 2'),
       ),
-      body: const Center(
-        child: Text('Ini screen kedua'),
+      body: Center(
+        child: Text("Ini screen kedua"),
       ),
     );
   }
