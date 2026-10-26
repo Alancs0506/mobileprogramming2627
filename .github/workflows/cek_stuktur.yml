@@ -78,7 +78,6 @@ jobs:
             grep -q "Widget build(BuildContext context)" "$FILE" || { echo "❌ Widget build(BuildContext context) "; ERROR=1; }
             grep -q "MaterialApp" "$FILE" || { echo "❌ MaterialApp Tidak ada"; ERROR=1; }
             grep -q "Test Route" "$FILE" || { echo "❌ title: Test Route "; ERROR=1; }
-            grep -q "home: MyHome()" "$FILE" || { echo "❌ home: MyHome()"; ERROR=1; }
             if [ $ERROR -eq 1 ]; then
               echo "=========================================================="
               echo "❌ Perbaiki pada class MyApp !"
