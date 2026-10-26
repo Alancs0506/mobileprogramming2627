@@ -1,39 +1,48 @@
-
 import 'package:flutter/material.dart';
 import 'layarkeduapisah.dart';
+
+class LayarKedua extends StatelessWidget {
+  const LayarKedua({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(
+          title: const Text('Ini Screen 2'),
+        ),
+        body: Center(
+            child: ElevatedButton(
+          child: const Text("Ini screen kedua, tap icon back di app bar"),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        )));
+  }
+}
 
 void main() {
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Test Route',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.blue,
-        ),
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.blue,
-          foregroundColor: Colors.white,
-        ),
-      ),
-      initialRoute: '/',
+      // home: MyHome(),
       routes: {
         '/': (context) => const MyHome(),
-        '/layar2': (context) => const LayarKedua(),
+        '/layar2': (context) => const LayarKedua()
       },
     );
   }
 }
 
+//perlu  dipisah karena Navigator perlu punya parent Material App
 class MyHome extends StatelessWidget {
-  const MyHome({super.key});
+  const MyHome({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,43 +54,25 @@ class MyHome extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // Tombol 1: ke LayarKedua() lewat named route
             ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed('/layar2');
-              },
-              child: const Text('Ke Screen Kedua'),
-            ),
-            const SizedBox(height: 20),
+                child: const Text('Ke screen Kedua'),
+                onPressed: () {
+                  Navigator.of(context).pushNamed("/layar2");
+                }),
+            const SizedBox(height: 16),
+            // Tombol 2: ke LayarKeduaPisah(...) dengan mengirim argumen pesan
             ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => const LayarKeduaPisah(
-                      pesan: "halloo ini pesan dari screen 1",
-                    ),
-                  ),
-                );
-              },
-              child: const Text('Kirim Pesan ke Screen Kedua'),
-            ),
+                child: const Text('Ke Screen Kedua Pisah'),
+                onPressed: () {
+                  Navigator.of(context)
+                      .push(MaterialPageRoute(builder: (context) {
+                    return const LayarKeduaPisah(
+                        pesan: "halloo ini pesan dari screen 1");
+                  }));
+                }),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class LayarKedua extends StatelessWidget {
-  const LayarKedua({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Ini Screen 2'),
-      ),
-      body: const Center(
-        child: Text('screen kedua, tap icon back di app bar'),
       ),
     );
   }

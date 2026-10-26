@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 
 class LayarKeduaPisah extends StatelessWidget {
@@ -10,13 +9,7 @@ class LayarKeduaPisah extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Layar Kedua Pisah'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
+        title: const Text('Screen Kedua Pisah'),
       ),
       body: Center(
         child: Text("Ini screen kedua pisah,ada Pesan : $pesan"),
